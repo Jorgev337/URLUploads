@@ -22,7 +22,7 @@ if not os.path.exists('thumbs'):
 
 helper = helpers()
 app = Client("my_account", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
-ADMIN_LIST = [1146062784] #users get whitelisted on the whitelist file, admin can add users to the whitelist using the bot.
+ADMIN_LIST = [] #users get whitelisted on the whitelist file, admin can add users to the whitelist using the bot.
 
 def is_admin(id):
     if id not in ADMIN_LIST:
@@ -39,13 +39,15 @@ def handle_video(url, file_name, chat_id, caption, uid):
             if os.path.isfile('thumbs/thumb_' + str(uid)):
                 message = app.send_video(chat_id, PATH + file_name, caption, thumb='thumbs/thumb_' + str(uid), duration=duration) 
             elif thumb != 'null':
-                message = app.send_video(chat_id, PATH + file_name, caption, 'thumbs/' + thumb, duration=duration)
+                message = app.send_video(chat_id, PATH + file_name, caption, thumb='thumbs/' + thumb, duration=duration)
             else:
                 message = app.send_video(chat_id, PATH + file_name, caption, duration=duration)
         except:
             remove(PATH + file_name)
             remove('thumbs/' + thumb)
-        # app.forward_messages(chatid, message.chat.id, message.message_id) #uncomment this if you want to forward everything somewhere
+        # app.forward_messages(, message.chat.id, message.message_id) 
+        # app.forward_messages(, message.chat.id, message.message_id)
+        # app.forward_messages(, message.chat.id, message.message_id)
         remove(PATH + file_name)
         remove('thumbs/' + thumb)
     else:
@@ -83,7 +85,7 @@ def start_job(client, message):
     n = random.randint(10000000, 99999999) #add some random shit to allow people to download the same thing at the same time
     chat_id = message.chat.id
     text = message.text
-    splited = text.split(" | ")
+    splited = text.split(" ")
     test = text.split()     
     uid = message.from_user.id
     url = splited[0]
@@ -91,9 +93,6 @@ def start_job(client, message):
     # for x in range(len(test)):
         # if test[x].isnumeric():
         #     message.forward( chat_id=-1001372231901, from_chat_id=message.chat.id, message_ids=message.message_id)
-    if not helper.b_whitelisted(chat_id):
-        message.reply_text('Usuário não autorizado, contacte @anticongelante para Comprar e obter acesso')
-        return
     if not is_valid:
         message.reply_text('Off ' + url, quote=True)
         return
@@ -139,9 +138,13 @@ def delete_thumb(client, message):
 def help(client, message):
     message.reply_text("""
    
-hgfhtfjhyjktyjyt
-rthrtjhr
-hjrty
+ Hi am URL Uploader bot..
+
+ 1. Send url ( Link | New Name ).
+ 2. Send Custom Thumbnail  =
+ /Thumbnail 
+ /delete_thumbnail 
+ (Optional).y
 
 
 
