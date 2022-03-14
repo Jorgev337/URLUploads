@@ -92,7 +92,10 @@ def start_job(client, message):
     is_valid = helper.b_valid_url(url)
     # for x in range(len(test)):
         # if test[x].isnumeric():
-        #     message.forward( chat_id=-1001372231901, from_chat_id=message.chat.id, message_ids=message.message_id)
+        #     message.forward( chat_id=-1001372231901, from_chat_id=message.chat.id, message_ids=message.message_id)message.reply_text('Usuário não autorizado, contacte @anticongelante para comprar o seu bot')
+        if not helper.b_whitelisted(chat_id):
+        message.reply_text('Usuário não autorizado, contacte @anticongelante para comprar o seu bot')
+        return
     if not is_valid:
         message.reply_text('Off ' + url, quote=True)
         return
@@ -138,13 +141,7 @@ def delete_thumb(client, message):
 def help(client, message):
     message.reply_text("""
    
- Hi am URL Uploader bot..
-
- 1. Send url ( Link | New Name ).
- 2. Send Custom Thumbnail  =
- /Thumbnail 
- /delete_thumbnail 
- (Optional).y
+🔝
 
 
 
